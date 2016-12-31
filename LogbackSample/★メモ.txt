@@ -1,0 +1,5 @@
+○ logback.xml を外部化
+	起動時、-Dlogback.configurationFileオプションにてパスを指定する
+	例：
+		java -Dlogback.configurationFile=./logback.xml -jar LogbackSample.jar
+

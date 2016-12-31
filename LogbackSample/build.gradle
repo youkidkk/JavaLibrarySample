@@ -1,0 +1,25 @@
+/* 依存関係 */
+dependencies {
+	compile (
+		'org.slf4j:slf4j-api:1.7.21',
+		'ch.qos.logback:logback-classic:1.1.7'
+	)
+
+	testCompile (
+	)
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+/* ビルドスクリプトディレクトリ */
+def scriptDir = '../gradle/scripts/'
+
+/* Java関連ビルドスクリプト */
+apply from: scriptDir + 'java.gradle'
+
+/* Jarファイル関連ビルドスクリプト */
+apply from: scriptDir + 'jar.gradle'
+
+/* チェック関連ビルドスクリプト */
+// apply from: scriptDir + 'check.gradle'

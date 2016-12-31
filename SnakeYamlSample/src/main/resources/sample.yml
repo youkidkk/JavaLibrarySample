@@ -1,0 +1,10 @@
+number: 123
+text: あいうえお
+list:
+  - abc
+  - def
+nestList:
+  - name: '1'
+    value: abc
+  - name: '2'
+    value: def

@@ -1,0 +1,24 @@
+/* 依存関係 */
+dependencies {
+	compile (
+		'com.github.spullara.mustache.java:compiler:0.8.8'
+	)
+
+	testCompile (
+	)
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+/* ビルドスクリプトディレクトリ */
+def scriptDir = '../gradle/scripts/'
+
+/* Java関連ビルドスクリプト */
+apply from: scriptDir + 'java.gradle'
+
+/* Jarファイル関連ビルドスクリプト */
+apply from: scriptDir + 'jar.gradle'
+
+/* チェック関連ビルドスクリプト */
+// apply from: scriptDir + 'check.gradle'

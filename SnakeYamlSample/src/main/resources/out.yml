@@ -1,0 +1,7 @@
+!!snakeyaml.sample.SampleBean
+list: [abc, def]
+nestList:
+- {name: '1', value: abc}
+- {name: '2', value: def}
+number: 123
+text: あいうえお
