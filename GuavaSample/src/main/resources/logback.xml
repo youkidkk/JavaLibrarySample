@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+
+	<property name="LogDir" value="./log" />
+
+	<appender name="ConsoleAppenderHighLight" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) %blue(%class{0}).%magenta(%method{12})[%green(%line)] - %boldBlue(%msg) %n
+			</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>trace</level>
+		</filter>
+	</appender>
+
+	<appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} %class{0}.%method{12}[%line] - %msg %n
+			</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>trace</level>
+		</filter>
+	</appender>
+
+	<appender name="DailyRollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LogDir}/daily.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${LogDir}/daily.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<!-- keep 10 days' worth of history -->
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} %class{0}.%method{12}[%line] - %msg %n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="ConsoleAppenderHighLight" />
+	</root>
+</configuration>
