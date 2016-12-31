@@ -26,4 +26,4 @@ apply from: scriptDir + 'java.gradle'
 apply from: scriptDir + 'jar.gradle'
 
 /* チェック関連ビルドスクリプト */
-apply from: scriptDir + 'check.gradle'
+// apply from: scriptDir + 'check.gradle'
