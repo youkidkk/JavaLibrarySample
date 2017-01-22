@@ -9,7 +9,7 @@ public class SparkFrameworkSample {
 
     /**
      * メイン
-     * @param args
+     * @param args コマンドライン引数
      */
     public static void main(String[] args) {
         port(80);

@@ -13,10 +13,10 @@ public class JacksonSample {
 
     /**
      * メイン
-     * @param args
-     * @throws JsonParseException
-     * @throws JsonMappingException
-     * @throws IOException
+     * @param args コマンドライン引数
+     * @throws JsonParseException JSON解析例外時
+     * @throws JsonMappingException JSONマッピング例外時
+     * @throws IOException IO例外時
      */
     public static void main(String[] args)
             throws JsonParseException, JsonMappingException, IOException {
