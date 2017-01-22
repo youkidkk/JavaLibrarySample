@@ -1,26 +1,39 @@
 subprojects {
 
-	/**
-	 * Gradleラッパー設定
-	 */
-	task wrapper(type: Wrapper) {
-		gradleVersion '2.14'
-	}
+    /**
+     * Gradleラッパー設定
+     */
+    task wrapper(type: Wrapper) {
+        gradleVersion '2.14'
+    }
 
-	/**
-	 * リポジトリ設定
-	 */
-	repositories {
-		jcenter()
-		mavenCentral()
+    apply plugin: 'java'
 
-		/* GitHubのプロジェクトを利用 */
-		maven { url 'https://jitpack.io' }
-	}
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-	apply plugin: 'java'
+    apply plugin: 'maven'
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+    /**
+     * リポジトリ設定
+     */
+    repositories {
+        jcenter()
+        mavenCentral()
 
+        /* GitHubのプロジェクトを利用 */
+        maven { url 'https://jitpack.io' }
+    }
+
+    /* ビルドスクリプトディレクトリ */
+    def scriptDir = '../gradle/scripts/'
+
+    /* Java関連ビルドスクリプト */
+    apply from: scriptDir + 'java.gradle'
+
+    /* Jarファイル関連ビルドスクリプト */
+    apply from: scriptDir + 'jar.gradle'
+
+    /* チェック関連ビルドスクリプト */
+    // apply from: scriptDir + 'check.gradle'
 }

@@ -9,18 +9,3 @@ dependencies {
 	testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.6.6'
 	testCompile group: 'com.github.youkidkk', name: 'youkidkk-test-util', version: '0.0.3'
 }
-
-apply plugin: 'java'
-apply plugin: 'maven'
-
-/* ビルドスクリプトディレクトリ */
-def scriptDir = '../gradle/scripts/'
-
-/* Java関連ビルドスクリプト */
-apply from: scriptDir + 'java.gradle'
-
-/* Jarファイル関連ビルドスクリプト */
-apply from: scriptDir + 'jar.gradle'
-
-/* チェック関連ビルドスクリプト */
-// apply from: scriptDir + 'check.gradle'
