@@ -32,5 +32,6 @@ compileTestJava {
  * Javadoc
  */
 javadoc {
-	options.encoding = defaultEncoding
+    options.charSet = defaultEncoding
+    options.encoding = defaultEncoding
 }
