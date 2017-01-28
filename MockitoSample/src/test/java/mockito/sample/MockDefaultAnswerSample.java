@@ -12,7 +12,7 @@ import org.junit.Test;
 public class MockDefaultAnswerSample {
 
     @SuppressWarnings("javadoc")
-    public static class Hoge {
+    private static class Hoge {
         private String field = "hoge hoge";
 
         public Fuga getFuga() {
@@ -26,7 +26,7 @@ public class MockDefaultAnswerSample {
     }
 
     @SuppressWarnings("javadoc")
-    public static class Fuga {
+    private static class Fuga {
         private String field = "fuga fuga";
 
         public Piyo getPiyo() {
@@ -40,7 +40,7 @@ public class MockDefaultAnswerSample {
     }
 
     @SuppressWarnings("javadoc")
-    public static class Piyo {
+    private static class Piyo {
         private String field = "piyo piyo";
 
         public int getValue() {
