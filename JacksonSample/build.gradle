@@ -1,14 +1,14 @@
 /* 依存関係 */
 dependencies {
-	compile (
-		'com.fasterxml.jackson.core:jackson-core:2.7.4',
-		'com.fasterxml.jackson.core:jackson-databind:2.7.4',
-		'com.fasterxml.jackson.core:jackson-annotations:2.7.4',
-		'org.projectlombok:lombok:1.16.8',
-		'org.slf4j:slf4j-api:1.7.12'
-	)
+    compile (
+        'com.fasterxml.jackson.core:jackson-core:2.7.4',
+        'com.fasterxml.jackson.core:jackson-databind:2.7.4',
+        'com.fasterxml.jackson.core:jackson-annotations:2.7.4',
+        'org.projectlombok:lombok:1.16.8',
+        'org.slf4j:slf4j-api:1.7.12'
+    )
 
-	testCompile (
-		'junit:junit:4.12'
-	)
+    testCompile (
+        'junit:junit:4.12'
+    )
 }
