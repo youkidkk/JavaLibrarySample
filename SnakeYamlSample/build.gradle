@@ -1,15 +1,15 @@
 /* 依存関係 */
 dependencies {
-	compile (
-		'org.yaml:snakeyaml:1.17',
-		'com.google.guava:guava:19.0',
-		'org.slf4j:slf4j-api:1.7.20',
-		'ch.qos.logback:logback-classic:1.1.7',
-		'org.projectlombok:lombok:1.16.6'
-	)
-	runtime (
-	)
-	testCompile (
-		'junit:junit:4.12'
-	)
+    compile (
+        'org.yaml:snakeyaml:1.17',
+        'com.google.guava:guava:19.0',
+        'org.slf4j:slf4j-api:1.7.20',
+        'ch.qos.logback:logback-classic:1.1.7',
+        'org.projectlombok:lombok:1.16.6'
+    )
+    runtime (
+    )
+    testCompile (
+        'junit:junit:4.12'
+    )
 }

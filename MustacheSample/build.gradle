@@ -1,9 +1,9 @@
 /* 依存関係 */
 dependencies {
-	compile (
-		'com.github.spullara.mustache.java:compiler:0.8.8'
-	)
+    compile (
+        'com.github.spullara.mustache.java:compiler:0.8.8'
+    )
 
-	testCompile (
-	)
+    testCompile (
+    )
 }
