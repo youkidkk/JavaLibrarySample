@@ -6,6 +6,7 @@
 /**/doc/
 /**/logs/
 /**/tmp/
+/**/tmptest/
 /**/.checkstyle
 /**/.classpath
 /**/.project
