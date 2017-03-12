@@ -2,7 +2,7 @@
 <!DOCTYPE configuration>
 <configuration>
 
-	<property name="LogDir" value="./log" />
+	<property name="LogDir" value="./logs" />
 
 	<appender name="ConsoleAppenderHighLight" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
