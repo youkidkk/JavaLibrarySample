@@ -1,15 +1,6 @@
 /* 依存関係 */
 dependencies {
-    compile (
-        'org.slf4j:slf4j-api:1.7.12',
-        'org.eclipse.persistence:javax.persistence:2.1.0',
-        'org.eclipse.persistence:eclipselink:2.6.2',
-        'com.h2database:h2:1.4.193',
-        'org.apache.commons:commons-lang3:3.1',
-        'org.projectlombok:lombok:1.16.6'
-    )
-
-    testCompile (
-        'junit:junit:4.12'
-    )
+    compile group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.6.2'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.193'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.6'
 }
