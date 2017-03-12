@@ -1,10 +1,4 @@
 /* 依存関係 */
 dependencies {
-    compile (
-        'com.sparkjava:spark-core:2.3'
-    )
-
-    testCompile (
-        'junit:junit:4.12'
-    )
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.3'
 }
