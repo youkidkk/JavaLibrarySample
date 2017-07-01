@@ -1,5 +1,4 @@
 /* 依存関係 */
 dependencies {
     compile group: 'com.sparkjava', name: 'spark-core', version: '2.3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.3.4'
 }

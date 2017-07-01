@@ -1,8 +1,6 @@
 package resteasy.sample;
 
-/**
- *
- */
+@SuppressWarnings("javadoc")
 public class TestResponseType {
 
     private int number;
