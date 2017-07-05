@@ -16,5 +16,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="sample_mapper.xml"/>
+        <mapper resource="mybatis/sample/mapper/Test2Mapper.xml"/>
+		<!-- <package name="mybatis.sample"/> -->
 	</mappers>
 </configuration>

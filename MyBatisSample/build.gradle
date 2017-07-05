@@ -3,3 +3,22 @@ dependencies {
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.1'
     compile group: 'com.h2database', name: 'h2', version: '1.4.193'
 }
+
+/* MyBatis-Generator用の設定 */
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+    }
+}
+
+apply plugin: "com.arenagod.gradle.MybatisGenerator"
+
+mybatisGenerator {
+    verbose = true
+    configFile = "${projectDir}/src/main/resources/generatorConfig.xml"
+}
