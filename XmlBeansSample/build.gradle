@@ -1,0 +1,4 @@
+/* 依存関係 */
+dependencies {
+    compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '2.4.0'
+}
