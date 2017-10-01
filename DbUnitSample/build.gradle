@@ -1,0 +1,5 @@
+/* 依存関係 */
+dependencies {
+    compile group: 'com.h2database', name: 'h2', version: '1.4.193'
+    compile group: 'org.dbunit', name: 'dbunit', version: '2.5.3'
+}
