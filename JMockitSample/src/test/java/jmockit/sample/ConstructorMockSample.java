@@ -2,6 +2,8 @@ package jmockit.sample;
 
 import static org.junit.Assert.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import mockit.Mock;
 import mockit.MockUp;
 import org.junit.Test;
@@ -13,21 +15,13 @@ import java.io.UnsupportedEncodingException;
  */
 public class ConstructorMockSample {
 
+    @Data
+    @AllArgsConstructor
     @SuppressWarnings("javadoc")
     public static class Hoge {
 
         private int fuga;
 
-        public Hoge() {
-        }
-
-        public Hoge(int fuga) {
-            this.fuga = fuga;
-        }
-
-        public int getFuga() {
-            return this.fuga;
-        }
     }
 
     /**

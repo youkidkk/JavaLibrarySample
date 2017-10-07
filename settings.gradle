@@ -1,4 +1,5 @@
 include 'CommonsLangSample'
+include 'CommonsValidatorSample'
 include 'DbUnitSample'
 include 'EclipseLinkSample'
 include 'GuavaSample'

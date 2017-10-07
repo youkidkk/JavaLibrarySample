@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC
+     "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN"
+     "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+<form-validation>
+   <global>
+      <validator name="required"
+         classname="commons.validator.sample.validator.SampleValidator"
+         method="validateRequired"
+         methodParams="java.lang.Object, org.apache.commons.validator.Field"
+         msg="{0} is required."/>
+      <validator name="age"
+         classname="commons.validator.sample.validator.SampleValidator"
+         method="validateAge"
+         methodParams="java.lang.Object, org.apache.commons.validator.Field"
+         msg="{0} is number and range in 0 to 150."/>
+   </global>
+   <formset>
+      <form name="userCheck">
+         <field property="name" depends="required">
+            <arg key="Name"/>
+         </field>
+         <field property="age" depends="age">
+            <arg key="Age"/>
+         </field>
+      </form>
+   </formset>
+</form-validation>
