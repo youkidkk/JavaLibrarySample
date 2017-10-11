@@ -17,11 +17,11 @@ import java.io.UnsupportedEncodingException;
 /**
  * コンストラクタモック化サンプル。
  */
+@SuppressWarnings("javadoc")
 public class ConstructorMockSample {
 
     @Data
     @AllArgsConstructor
-    @SuppressWarnings("javadoc")
     public static class Hoge {
 
         public Hoge() {
