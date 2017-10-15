@@ -1,14 +1,62 @@
 package jmockit.sample;
 
-@SuppressWarnings("javadoc")
+/**
+ * モック化対象クラス。
+ */
 public class MockTarget {
 
-    public String publicMethod(String string) {
-        return "publicMethod : " + string;
+    /** フィールド */
+    String field;
+
+    /**
+     * コンストラクタ。
+     *
+     * @param arg 引数
+     */
+    public MockTarget(String arg) {
+        field = arg;
     }
 
-    public static String staticPublicMethod(String string) {
-        return "staticPublicMethod : " + string;
+    /**
+     * public メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    public String publicMethod(String arg) {
+        return "publicMethod : " + arg;
+    }
+
+    /**
+     * public static メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    public static String publicStaticMethod(String arg) {
+        return "publicStaticMethod : " + arg;
+    }
+
+    /**
+     * private メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    @SuppressWarnings("unused")
+    private String privateMethod(String arg) {
+        return "privateMethod : " + arg;
+    }
+
+    /**
+     * private static メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    @SuppressWarnings("unused")
+    private static String privateStaticMethod(String arg) {
+        return "privateStaticMethod : " + arg;
     }
 
 }
