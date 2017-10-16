@@ -74,6 +74,42 @@ public class MockingSample {
     }
 
     /**
+     * protected メソッドのモック化。
+     *
+     * @throws Exception 例外
+     */
+    @Test
+    public void mockProtectedMethod() throws Exception {
+        new Expectations() {
+            {
+                Deencapsulation.invoke(target, "protectedMethod", "hoge");
+                result = "Fake protectedMethod";
+                times = 1;
+            }
+        };
+        assertThat(Deencapsulation.invoke(target, "protectedMethod", "hoge"),
+                is("Fake protectedMethod"));
+    }
+
+    /**
+     * protected static メソッドのモック化。
+     *
+     * @throws Exception 例外
+     */
+    @Test
+    public void mockProtectedStaticMethod() throws Exception {
+        new Expectations() {
+            {
+                Deencapsulation.invoke(target, "protectedStaticMethod", "hoge");
+                result = "Fake protectedStaticMethod";
+                times = 1;
+            }
+        };
+        assertThat(Deencapsulation.invoke(target, "protectedStaticMethod", "hoge"),
+                is("Fake protectedStaticMethod"));
+    }
+
+    /**
      * private メソッドのモック化。
      *
      * @throws Exception 例外

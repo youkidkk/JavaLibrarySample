@@ -38,6 +38,28 @@ public class MockTarget {
     }
 
     /**
+     * protected メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    @SuppressWarnings("unused")
+    protected String protectedMethod(String arg) {
+        return "protectedMethod : " + arg;
+    }
+
+    /**
+     * protected static メソッド。
+     *
+     * @param arg 引数
+     * @return 戻り値
+     */
+    @SuppressWarnings("unused")
+    protected static String protectedStaticMethod(String arg) {
+        return "protectedStaticMethod : " + arg;
+    }
+
+    /**
      * private メソッド。
      *
      * @param arg 引数
