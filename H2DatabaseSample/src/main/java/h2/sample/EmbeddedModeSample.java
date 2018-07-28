@@ -3,12 +3,20 @@ package h2.sample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,16 +34,20 @@ public class EmbeddedModeSample {
     private static final DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("yyyy-MM-dd hh:mm:ss.SSS");
 
-    public void execute() throws ClassNotFoundException {
+    public void execute()
+            throws ClassNotFoundException, SQLException, URISyntaxException, IOException {
         Class.forName("org.h2.Driver");
 
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:./db/test", "sa", "")) {
-            executeSql(conn,
-                    "create table if not exists test (id identity, number int, text varchar, datetime timestamp);");
+        createTable();
 
+        try (Connection conn = getConnection();
+                PreparedStatement insertStmt = //
+                        conn.prepareStatement(getResourceText("insert.sql"));
+                PreparedStatement selectStmt = //
+                        conn.prepareStatement(getResourceText("select.sql"));) {
             IntStream.range(1, 99).forEach(i -> {
                 try {
-                    executeSql(conn, "insert into test (number, text, datetime) values (?, ?, ?);",
+                    executeSql(conn, insertStmt,
                             i,
                             "text : " + i,
                             LocalDateTime.now().format(formatter));
@@ -44,31 +56,45 @@ public class EmbeddedModeSample {
                 }
             });
 
-            List<Map<String, Object>> resultList = executeQuerySql(conn,
-                    "select * from test where id % ? = 0;", 10);
+            List<Map<String, Object>> resultList = executeQuerySql(conn, selectStmt, 10);
             printResultList(resultList);
-        } catch (SQLException | RuntimeException e) {
-            logger.error("例外発生 : ", e);
         }
     }
 
-    private void executeSql(Connection conn, String sql, Object... args)
-            throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            setArguments(ps, args);
-            ps.execute();
+    private void createTable() throws SQLException, URISyntaxException, IOException {
+        try (Connection conn = getConnection()) {
+            executeSql(conn, getResourceText("create_table.sql"));
         }
     }
 
-    private List<Map<String, Object>> executeQuerySql(Connection conn, String sql,
-            Object... args)
-            throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            setArguments(ps, args);
-            ResultSet rs = ps.executeQuery();
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:h2:./db/test", "sa", "");
+    }
 
-            return getResultList(rs);
+    private String getResourceText(String resourceName) throws URISyntaxException, IOException {
+        URL url = this.getClass().getClassLoader().getResource(resourceName);
+        Path path = Paths.get(url.toURI());
+        return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+    }
+
+    private void executeSql(Connection conn, String sql) throws SQLException {
+        try (Statement st = conn.createStatement()) {
+            st.execute(sql);
         }
+    }
+
+    private void executeSql(Connection conn, PreparedStatement ps, Object... args)
+            throws SQLException {
+        setArguments(ps, args);
+        ps.execute();
+    }
+
+    private List<Map<String, Object>> executeQuerySql(Connection conn, PreparedStatement ps,
+            Object... args) throws SQLException {
+        setArguments(ps, args);
+        ResultSet rs = ps.executeQuery();
+
+        return getResultList(rs);
     }
 
     private List<Map<String, Object>> getResultList(ResultSet rs) throws SQLException {
@@ -117,7 +143,11 @@ public class EmbeddedModeSample {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        new EmbeddedModeSample().execute();
+        try {
+            new EmbeddedModeSample().execute();
+        } catch (SQLException | URISyntaxException | IOException e) {
+            logger.error("例外発生 : ", e);
+        }
     }
 
 }
