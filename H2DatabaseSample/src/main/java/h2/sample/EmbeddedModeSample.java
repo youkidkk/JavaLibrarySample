@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,27 +21,32 @@ import java.util.stream.IntStream;
 @SuppressWarnings("javadoc")
 public class EmbeddedModeSample {
 
-    private static Logger logger = LoggerFactory.getLogger(EmbeddedModeSample.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmbeddedModeSample.class);
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd hh:mm:ss.SSS");
 
     public void execute() throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
 
         try (Connection conn = DriverManager.getConnection("jdbc:h2:./db/test", "sa", "")) {
-            this.executeSql(conn,
-                    "create table if not exists test (id identity, number int, text varchar);");
+            executeSql(conn,
+                    "create table if not exists test (id identity, number int, text varchar, datetime timestamp);");
 
             IntStream.range(1, 99).forEach(i -> {
                 try {
-                    this.executeSql(conn, "insert into test (number, text) values (?, ?);", i,
-                            "text : " + i);
+                    executeSql(conn, "insert into test (number, text, datetime) values (?, ?, ?);",
+                            i,
+                            "text : " + i,
+                            LocalDateTime.now().format(formatter));
                 } catch (SQLException e) {
                     throw new RuntimeException("Insert 失敗", e);
                 }
             });
 
-            List<Map<String, Object>> resultList = this.executeQuerySql(conn,
+            List<Map<String, Object>> resultList = executeQuerySql(conn,
                     "select * from test where id % ? = 0;", 10);
-            this.printResultList(resultList);
+            printResultList(resultList);
         } catch (SQLException | RuntimeException e) {
             logger.error("例外発生 : ", e);
         }
@@ -48,7 +55,7 @@ public class EmbeddedModeSample {
     private void executeSql(Connection conn, String sql, Object... args)
             throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            this.setArguments(ps, args);
+            setArguments(ps, args);
             ps.execute();
         }
     }
@@ -57,21 +64,22 @@ public class EmbeddedModeSample {
             Object... args)
             throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            this.setArguments(ps, args);
+            setArguments(ps, args);
             ResultSet rs = ps.executeQuery();
 
-            return this.getResultList(rs);
+            return getResultList(rs);
         }
     }
 
     private List<Map<String, Object>> getResultList(ResultSet rs) throws SQLException {
-        List<String> columnNames = this.getColumnNames(rs);
+        List<String> columnNames = getColumnNames(rs);
 
         List<Map<String, Object>> resultList = new ArrayList<>();
         while (rs.next()) {
             Map<String, Object> map = new HashMap<>();
             for (String columnName : columnNames) {
-                map.put(columnName, rs.getObject(columnName));
+                Object obj = rs.getObject(columnName);
+                map.put(columnName, obj);
             }
             resultList.add(map);
         }
