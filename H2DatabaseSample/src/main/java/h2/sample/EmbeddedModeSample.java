@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,9 +41,9 @@ public class EmbeddedModeSample {
 
         try (Connection conn = getConnection();
                 PreparedStatement insertStmt = //
-                        conn.prepareStatement(getResourceText("insert.sql"));
+                        conn.prepareStatement(getSqlText("insert.sql"));
                 PreparedStatement selectStmt = //
-                        conn.prepareStatement(getResourceText("select.sql"));) {
+                        conn.prepareStatement(getSqlText("select.sql"));) {
             IntStream.range(1, 99).forEach(i -> {
                 try {
                     executeSql(conn, insertStmt,
@@ -63,7 +62,7 @@ public class EmbeddedModeSample {
 
     private void createTable() throws SQLException, URISyntaxException, IOException {
         try (Connection conn = getConnection()) {
-            executeSql(conn, getResourceText("create_table.sql"));
+            executeSql(conn, getSqlText("create_table.sql"));
         }
     }
 
@@ -71,9 +70,8 @@ public class EmbeddedModeSample {
         return DriverManager.getConnection("jdbc:h2:./db/test", "sa", "");
     }
 
-    private String getResourceText(String resourceName) throws URISyntaxException, IOException {
-        URL url = this.getClass().getClassLoader().getResource(resourceName);
-        Path path = Paths.get(url.toURI());
+    private String getSqlText(String resourceName) throws URISyntaxException, IOException {
+        Path path = Paths.get("./sql", resourceName);
         return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
     }
 
